@@ -114,24 +114,32 @@ For example, to create an image from binary data returned by a request, you can 
 ## JSON Response Content
 
 Often Web API responses will be encoded as JSON.
-The Response.json_safe(...) convenience method can be used to parse JSON safely, returning a provided default when the body is not valid JSON and optionally checking the response status.
+HTTPX also provides a safer JSON parsing helper: `Response.json_safe(...)`. This helper behaves like `r.json()`, but offers improved handling of common parsing issues and optional fallback behaviour. For example:
 
 ```pycon
 >>> r = httpx.get('https://api.example.com/data')
->>> # Return an empty dict when parsing fails, and raise for non-2xx responses (default behaviour)
->>> r.json_safe(default={})
-{}
+>>> r.json_safe()
+{'items': [...]}  # parsed JSON
 ```
 
-To skip raising on non-2xx responses, pass check_status=False:
+You can provide a fallback value to return on parse errors:
 
 ```pycon
->>> r = httpx.get('https://api.example.com/data')
->>> r.json_safe(default=None, check_status=False)
+>>> r = httpx.get('https://api.example.com/broken-json')
+>>> r.json_safe(default=None)
 None
 ```
 
-This method is useful when you want a safe fallback value instead of handling JSON parsing errors or status checks manually.
+Options passed to `json_safe(...)` are forwarded to the underlying JSON parser, which can be useful for controlling number handling, for example:
+
+```pycon
+>>> from decimal import Decimal
+>>> r = httpx.get('https://api.example.com/prices')
+>>> r.json_safe(parse_float=Decimal)
+{'price': Decimal('9.99')}
+```
+
+See the API reference for full details and the available parameters for `Response.json_safe()`.
 
 
 ```pycon
