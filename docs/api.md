@@ -73,7 +73,7 @@
 * `def .raise_for_status()` - **Response**
 * `def .json()` - **Any**
 * `def .read()` - **bytes**
-* `def .json_safe([default])` - **Any**
+* `def .json_safe()` - **Any**
 
 * `def .iter_raw([chunk_size])` - **bytes iterator**
 * `def .iter_bytes([chunk_size])` - **bytes iterator**
