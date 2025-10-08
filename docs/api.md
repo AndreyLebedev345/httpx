@@ -73,9 +73,10 @@
 * `def .raise_for_status()` - **Response**
 * `def .json()` - **Any**
 * `def .read()` - **bytes**
-* `def .json_safe()` - **Any** - Like `.json()`, but returns `None` for empty response bodies instead of raising.
-
 * `def .iter_raw([chunk_size])` - **bytes iterator**
+* `def .json_safe()` - **Any**
+  * A safer variant of `.json()` with improved robustness for parsing response bodies. Provides clearer error handling and better behavior for common edge cases (such as empty responses or unexpected content types), returning the parsed JSON on success.
+
 * `def .iter_bytes([chunk_size])` - **bytes iterator**
 * `def .iter_text([chunk_size])` - **text iterator**
 * `def .iter_lines()` - **text iterator**
