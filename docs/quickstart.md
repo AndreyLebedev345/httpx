@@ -114,17 +114,21 @@ For example, to create an image from binary data returned by a request, you can 
 ## JSON Response Content
 
 Often Web API responses will be encoded as JSON.
-
-For safer JSON parsing you can use the new `json_safe` convenience method which returns a specified fallback value if parsing fails (for example when the response body is empty or contains invalid JSON):
+HTTPX also includes a convenience helper method `Response.json_safe()` for more robust JSON parsing. It behaves like `Response.json()` when parsing succeeds, but will return a safe fallback instead of raising on malformed or empty JSON responses by default. You can also provide your own fallback value.
 
 ```pycon
 >>> r = httpx.get('https://api.github.com/events')
->>> r.json_safe(default=[])
-[]
+>>> r.json_safe()
+[{u'repository': {u'open_issues': 0, u'url': 'https://github.com/...' ...  }}]
+
+>>> r = httpx.get('https://example.com/broken.json')
+>>> r.json_safe()
+None
+>>> r.json_safe(default={})
+{}
 ```
 
-This is useful when you want to provide a default value instead of handling parsing exceptions.
-
+For full details and any additional options, see the API reference.
 
 ```pycon
 >>> r = httpx.get('https://api.github.com/events')
