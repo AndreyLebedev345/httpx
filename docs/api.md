@@ -73,7 +73,8 @@
 * `def .raise_for_status()` - **Response**
 * `def .json()` - **Any**
 * `def .read()` - **bytes**
-* `def .json_safe([default=None], [**kwargs])` - **Any** - Parse the response body as JSON, returning `default` if the body is empty or if JSON decoding fails.
+* `def .json_safe([allow_text=False])` - **Any**
+* Like `.json()`, but with improved robustness: if the response body is empty it returns `None`. If JSON decoding fails and `allow_text` is `True`, the raw `text` is returned; otherwise the JSON decoding error is raised.
 
 * `def .iter_raw([chunk_size])` - **bytes iterator**
 * `def .iter_bytes([chunk_size])` - **bytes iterator**
