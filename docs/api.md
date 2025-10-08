@@ -72,9 +72,9 @@
   the total elapsed seconds.
 * `def .raise_for_status()` - **Response**
 * `def .json()` - **Any**
-* `def .json_safe()` - **Any**
-
 * `def .read()` - **bytes**
+* `def .json_safe([default=None], [**kwargs])` - **Any** - Parse the response body as JSON, returning `default` if the body is empty or if JSON decoding fails.
+
 * `def .iter_raw([chunk_size])` - **bytes iterator**
 * `def .iter_bytes([chunk_size])` - **bytes iterator**
 * `def .iter_text([chunk_size])` - **text iterator**
