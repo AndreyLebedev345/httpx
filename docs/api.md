@@ -86,6 +86,9 @@
 * `def .aiter_lines()` - **async text iterator**
 * `def .aclose()` - **None**
 * `def .anext()` - **Response**
+* `def .json_or_text()` - **Any**
+* `def .save_to_file(path, [overwrite=False])` - **None**
+
 
 ## `Request`
 
