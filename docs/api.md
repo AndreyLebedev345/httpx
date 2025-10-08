@@ -73,10 +73,9 @@
 * `def .raise_for_status()` - **Response**
 * `def .json()` - **Any**
 * `def .read()` - **bytes**
-* `def .iter_raw([chunk_size])` - **bytes iterator**
-* `def .json_safe([default=None])` - **Any**
-  * Parses the response body as JSON. If parsing fails (for example because the body is empty or contains invalid JSON), returns the provided `default` instead of raising an exception.
+* `def .json_safe()` - **Any** - Like `.json()`, but safer: attempts to decode the response body as JSON and, on parsing errors or unexpected/non-standard values, can return a caller-provided default instead of raising.
 
+* `def .iter_raw([chunk_size])` - **bytes iterator**
 * `def .iter_bytes([chunk_size])` - **bytes iterator**
 * `def .iter_text([chunk_size])` - **text iterator**
 * `def .iter_lines()` - **text iterator**
