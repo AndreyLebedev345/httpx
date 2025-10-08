@@ -115,6 +115,17 @@ For example, to create an image from binary data returned by a request, you can 
 
 Often Web API responses will be encoded as JSON.
 
+For safer JSON parsing you can use the new `json_safe` convenience method which returns a specified fallback value if parsing fails (for example when the response body is empty or contains invalid JSON):
+
+```pycon
+>>> r = httpx.get('https://api.github.com/events')
+>>> r.json_safe(default=[])
+[]
+```
+
+This is useful when you want to provide a default value instead of handling parsing exceptions.
+
+
 ```pycon
 >>> r = httpx.get('https://api.github.com/events')
 >>> r.json()
